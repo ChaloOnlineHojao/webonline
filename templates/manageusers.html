@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+<!-- Add css here -->
+{% block css %}
+<link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static',filename='server/images/d.png') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename='server/assets/css/normalize.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename='server/assets/css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename='server/assets/css/font-awesome.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename='server/assets/css/themify-icons.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename='server/assets/css/pe-icon-7-filled.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename='server/assets/css/flag-icon.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename='server/assets/css/cs-skin-elastic.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename='server/assets/css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename='server/assets/css/styleown.css') }}">
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+{% endblock %}
+
+<!-- Main area -->
+{% block main %}
+<div class="content pb-0">
+      <div class="orders">
+            <div class="row">
+                  <div class="col-xl-12">
+                        <div class="card">
+                              <div class="card-body">
+                                    <h4 class="box-title">Manage Users</h4>
+                              </div>
+                              <div class="card-body--">
+                                    <div class="table-stats order-table ov-h">
+                                          <table class="table ">
+                                                <thead>
+                                                      <tr>
+                                                            <th class="serial">#</th>
+                                                            <th class="avatar">Avatar</th>
+                                                            <th>Name</th>
+                                                            <th>Email</th>
+                                                            <th>Password</th>
+                                                            <th>Mobile</th>
+                                                            <th>Status</th>
+                                                      </tr>
+                                                </thead>
+                                                <tbody>
+                                                      {% for user in allUsers: %}
+                                                      <tr>
+                                                            <td class="serial">1</td>
+                                                            <td class="avatar">
+                                                                  <div class="round-img">
+                                                                        <a href="#"><img class="rounded-circle" src="{{ url_for('static',filename='server/images/admin.jpg') }}" alt=""></a>
+                                                                  </div>
+                                                            </td>
+                                                            <td>{{ user['name'] }}</td>
+                                                            <td> <span class="name">{{ user['email'] }}</span> </td>
+                                                            <td> <span class="product">{{ user['password'] }}</span> </td>
+                                                            <td><span>{{ user['mobile'] }}</span></td>
+                                                            <td>
+                                                                  {% if user['status']==1 %}
+                                                                  <a href="/admin/user/changeStatus/{{ user['email'] }}?oper=block" class='btn active-user'>Active</a>
+                                                                  {% else %}
+                                                                  <a href="/admin/user/changeStatus/{{ user['email'] }}?oper=active" class='btn blocked-user'>Blocked</a>
+                                                                  {% endif %}
+                                                            </td>
+                                                      </tr>
+                                                      {% endfor %}
+                                                </tbody>
+                                          </table>
+                                    </div>
+                              </div>
+                        </div>
+                  </div>
+            </div>
+      </div>
+</div>
+{% endblock %}
